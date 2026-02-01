@@ -45,3 +45,4 @@ __pycache__/
 
 DOCKER_DEPLOYMENT.md
 pnpm-lock.yaml
+target/
