@@ -20,9 +20,10 @@ run-with-debug-logging: kill
 # Build for production
 build-for-production:
 	$(NVM) && npm run tauri build
+
 rebase:
 	git remote add upstream https://github.com/lbjlaq/Antigravity-Manager.git || true
 	git fetch upstream
 	git checkout main
 	git rebase upstream/main
-	git push origin main
+	git push --force-with-lease origin main
