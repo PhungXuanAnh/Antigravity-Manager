@@ -1,5 +1,9 @@
 SHELL := /bin/bash
 NVM := source $(HOME)/.nvm/nvm.sh && nvm use 22.17.1
+CARGO := source $(HOME)/.cargo/env
+
+setup-dev-env:
+	./setup-dev-env.sh
 
 # Kill any existing zombie instances first (single-instance plugin causes black screen otherwise)
 kill:
@@ -7,7 +11,7 @@ kill:
 
 # Run in development mode (with rebuild if needed)
 run-in-development-mode: kill
-	$(NVM) && npm run tauri dev
+	$(CARGO) && $(NVM) && npm run tauri dev
 
 # Run the already-compiled binary directly (no rebuild, fastest)
 run-binary: kill
@@ -15,11 +19,11 @@ run-binary: kill
 
 # Run with debug logging
 run-with-debug-logging: kill
-	$(NVM) && RUST_LOG=debug npm run tauri dev
+	$(CARGO) && $(NVM) && RUST_LOG=debug npm run tauri dev
 
 # Build for production
 build-for-production:
-	$(NVM) && npm run tauri build
+	$(CARGO) && $(NVM) && npm run tauri build
 
 rebase:
 	git remote add upstream https://github.com/lbjlaq/Antigravity-Manager.git || true
